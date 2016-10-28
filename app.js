@@ -1,16 +1,32 @@
-var atticus = ["Atticus", "2405", "47000", 3];
-var jem = ["Jem", "62347", "63500", 4];
-var boo = ["Boo", "11435", "54000", 3];
-var scout = ["Scout", "6243", "74750", 5];
+// literal
+var atticus1 = {
+  name: "Atticus",
+  empNum: "2405",
+  doAThing: function() {
+    return this.name;
+  }
+};
+
+// Constructor
+function Person(name, employeeNumber, salary, rating) {
+  this.name = name;
+  this.empNumber = employeeNumber;
+  this.salary = salary;
+  this.rating = rating;
+}
+
+var atticus = new Person("Atticus", "2405", "47000", 3);
+var jem = new Person("Jem", "62347", "63500", 4);
+var boo = new Person("Boo", "11435", "54000", 3);
+var scout = new Person("Scout", "6243", "74750", 5);
 
 var employees = [atticus, jem, boo, scout];
+// console.log(employees);
 
 function calculateSTI(empInfo) {
-	var name = empInfo[0];
-	var empNumber = empInfo[1];
-	var currentSalary = Math.round(parseFloat(empInfo[2]));
-	var rating = empInfo[3];
-	
+  console.log(this);
+
+  var currentSalary = Math.round(parseFloat(empInfo.salary));
 	var processedEmployee = [];
 	var bonus = 0;
 	var bonusPercentage = 0;
@@ -18,7 +34,7 @@ function calculateSTI(empInfo) {
 	var totalBonus = bonus;
 
 	// calc sti
-	switch(rating) {
+	switch(empInfo.rating) {
 		case 0:
 		case 1:
 		case 2:
@@ -37,10 +53,10 @@ function calculateSTI(empInfo) {
 			bonusPercentage = 0;
 	}
 
-	bonusPercentage = adjustBonusPercentage(empNumber, bonusPercentage, currentSalary);
-	
+	bonusPercentage = adjustBonusPercentage(empInfo.empNumber, bonusPercentage, currentSalary);
+
 	// build processed array
-	processedEmployee[0] = name;
+	processedEmployee[0] = empInfo.name;
 	processedEmployee[1] = bonusPercentage;
 
 	bonus = Math.round(bonusPercentage * currentSalary);
