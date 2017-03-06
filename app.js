@@ -20,7 +20,7 @@ for(var i = 0; i < employees.length; i++) {
 
 function calculateBonus(empInfo) {
   var currentSalary = Math.round(parseFloat(empInfo.salary));
-	var processedEmployee = [];
+	var processedEmployee = {};
 	var bonus = 0;
 	var bonusPercentage = 0;
 	var adjSalary = currentSalary;
@@ -50,14 +50,14 @@ function calculateBonus(empInfo) {
 	bonusPercentage = adjustBonusPercentage(empInfo.empNumber, bonusPercentage, currentSalary);
 
 	// build processed array
-	processedEmployee[0] = empInfo.name;
-	processedEmployee[1] = bonusPercentage;
+	processedEmployee.name = empInfo.name;
+	processedEmployee.bonusPercentage = bonusPercentage;
 
 	bonus = Math.round(bonusPercentage * currentSalary);
 	adjSalary = currentSalary + bonus;
 
-	processedEmployee[2] = adjSalary;
-	processedEmployee[3] = bonus;
+	processedEmployee.adjustedSalary = adjSalary;
+	processedEmployee.bonusAmount = bonus;
 
 	return processedEmployee;
 } // end calculateBonus
