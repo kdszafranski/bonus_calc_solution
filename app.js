@@ -1,12 +1,3 @@
-// literal
-var atticus1 = {
-  name: "Atticus",
-  empNum: "2405",
-  doAThing: function() {
-    return this.name;
-  }
-};
-
 // Constructor
 function Person(name, employeeNumber, salary, rating) {
   this.name = name;
@@ -21,19 +12,21 @@ var boo = new Person("Boo", "11435", "54000", 3);
 var scout = new Person("Scout", "6243", "74750", 5);
 
 var employees = [atticus, jem, boo, scout];
-// console.log(employees);
 
-function calculateSTI(empInfo) {
-  console.log(this);
+// Calculate bonsues
+for(var i = 0; i < employees.length; i++) {
+	console.log(calculateBonus(employees[i]));
+}
 
+function calculateBonus(empInfo) {
   var currentSalary = Math.round(parseFloat(empInfo.salary));
 	var processedEmployee = [];
 	var bonus = 0;
 	var bonusPercentage = 0;
-	var adjSalary = currentSalary;	// base + STI
+	var adjSalary = currentSalary;
 	var totalBonus = bonus;
 
-	// calc sti
+	// calc bonus percentage
 	switch(empInfo.rating) {
 		case 0:
 		case 1:
@@ -53,6 +46,7 @@ function calculateSTI(empInfo) {
 			bonusPercentage = 0;
 	}
 
+  // adjust with additional rules
 	bonusPercentage = adjustBonusPercentage(empInfo.empNumber, bonusPercentage, currentSalary);
 
 	// build processed array
@@ -66,7 +60,7 @@ function calculateSTI(empInfo) {
 	processedEmployee[3] = bonus;
 
 	return processedEmployee;
-}
+} // end calculateBonus
 
 function adjustBonusPercentage(empNumber, bonusPercentage, currentSalary) {
 	if(empNumber.length == 4) {
@@ -77,15 +71,10 @@ function adjustBonusPercentage(empNumber, bonusPercentage, currentSalary) {
 		bonusPercentage -= .01;
 	}
 
+  // limit to max bonus percent
 	if(bonusPercentage > .13) {
 		bonusPercentage = .13;
 	}
 
 	return bonusPercentage;
-}
-
-
-for(var i = 0; i < employees.length; i++) {
-	console.log(calculateSTI(employees[i]));
-
 }
